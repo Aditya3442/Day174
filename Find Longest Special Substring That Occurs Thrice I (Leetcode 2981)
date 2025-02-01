@@ -1,0 +1,26 @@
+class Solution {
+    public int maximumLength(String s) {
+        Map<String , Integer> map = new HashMap<>();
+        int n = s.length();
+        for(int i = 0; i < n; i++){
+            StringBuilder sb = new StringBuilder();
+            for(int j = i; j < n; j++) {
+                if(sb.length() == 0 || s.charAt(i) == s.charAt(j)){
+                    sb.append(s.charAt(i));
+                    String str = sb.toString();
+                    map.put(str , map.getOrDefault(str , 0) + 1);
+                }
+                else
+                    break;
+            }
+        }
+
+        int answer = -1;
+        for(Map.Entry<String , Integer> entry : map.entrySet()){
+            if(entry.getValue() >= 3){
+                answer = Math.max(answer , entry.getKey().length());
+            }
+        }
+        return answer;
+    }
+}
