@@ -1,0 +1,24 @@
+class Solution {
+    public boolean[] isArraySpecial(int[] nums, int[][] queries) {
+        int n = nums.length;
+        int i = 0;
+        int j = 0;
+        int validEnd[] = new int[n];
+        while(i < n){
+            if(j < i)
+              j++;
+            while(j < (n - 1) && nums[j] % 2 != nums[j + 1] % 2){
+                j++;
+            }
+            validEnd[i] = j;
+            i++;
+        }
+
+        boolean answer[] = new boolean[queries.length];
+        for(int k = 0; k < queries.length ; k++){
+            if(validEnd[queries[k][0]] >= queries[k][1])
+                answer[k] = true;
+        }
+        return answer;
+    }
+}
